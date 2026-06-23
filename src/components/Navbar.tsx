@@ -131,7 +131,7 @@ export default function Navbar() {
           {/* Desktop CTA */}
           <div className="hidden md:block">
             <Link
-              href="/#contact"
+              href="/book"
               className="rounded-full bg-brand-red px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-brand-red-dark"
             >
               Request Staff
@@ -203,7 +203,7 @@ export default function Navbar() {
               ))}
               <li className="pt-2">
                 <Link
-                  href="/#contact"
+                  href="/book"
                   onClick={() => setOpen(false)}
                   className="block rounded-full bg-brand-red px-5 py-2.5 text-center text-sm font-semibold text-white transition-colors hover:bg-brand-red-dark"
                 >

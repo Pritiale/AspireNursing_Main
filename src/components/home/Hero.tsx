@@ -32,7 +32,7 @@ export default function Hero() {
 
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
             <Link
-              href="#contact"
+              href="/book"
               className="rounded-full bg-brand-red px-8 py-3.5 text-center text-sm font-semibold text-white shadow-lg shadow-brand-red/30 transition-all hover:bg-brand-red-dark hover:shadow-xl"
             >
               Request Staff Now
@@ -67,10 +67,7 @@ export default function Hero() {
                 <p className="text-2xl font-bold">24/7</p>
                 <p className="text-xs text-white/70">Availability</p>
               </div>
-              <div>
-                <p className="text-2xl font-bold">10+ yrs</p>
-                <p className="text-xs text-white/70">Experience</p>
-              </div>
+              
             </div>
           </div>
         </div>

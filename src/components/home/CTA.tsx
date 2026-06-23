@@ -14,7 +14,7 @@ export default function CTA() {
           </p>
           <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
             <Link
-              href="#contact"
+              href="/book"
               className="rounded-full bg-brand-red px-7 py-3 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-brand-red-dark"
             >
               Request Staff

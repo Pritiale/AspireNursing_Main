@@ -72,7 +72,7 @@ export default function ServicesPage() {
                   {service.description}
                 </p>
                 <Link
-                  href="#contact"
+                  href={`/book/${service.id}`}
                   className="mt-7 inline-flex rounded-full bg-brand-red px-7 py-3 text-sm font-semibold text-white transition-colors hover:bg-brand-red-dark"
                 >
                   Request {service.title}
@@ -114,7 +114,7 @@ export default function ServicesPage() {
             </p>
             <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
               <Link
-                href="#contact"
+                href="/book"
                 className="rounded-full bg-brand-red px-7 py-3 text-sm font-semibold text-white transition-colors hover:bg-brand-red-dark"
               >
                 Request Staff
