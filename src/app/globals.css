@@ -1,0 +1,66 @@
+@import "tailwindcss";
+
+/*
+  Aspire Nursing Agency brand theme.
+  Colors derived from the logo: crimson red + steel blue on white.
+*/
+:root {
+  --background: #ffffff;
+  --foreground: #1a2230;
+
+  /* Brand */
+  --brand-red: #e23a4e;
+  --brand-red-dark: #c22a3d;
+  --brand-blue: #34699a;
+  --brand-blue-dark: #28547e;
+  --brand-blue-light: #eef3f9;
+  --brand-muted: #5b6573;
+  --brand-border: #e6eaf0;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  --color-brand-red: var(--brand-red);
+  --color-brand-red-dark: var(--brand-red-dark);
+  --color-brand-blue: var(--brand-blue);
+  --color-brand-blue-dark: var(--brand-blue-dark);
+  --color-brand-blue-light: var(--brand-blue-light);
+  --color-brand-muted: var(--brand-muted);
+  --color-brand-border: var(--brand-border);
+
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Slow "Ken Burns" zoom for hero imagery */
+@keyframes kenburns {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.12);
+  }
+}
+
+.animate-kenburns {
+  animation: kenburns 18s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-kenburns {
+    animation: none;
+  }
+}
