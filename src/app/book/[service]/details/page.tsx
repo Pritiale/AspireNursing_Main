@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
 import { services } from "@/data/services";
@@ -7,10 +6,6 @@ import YourDetailsForm from "@/components/booking/YourDetailsForm";
 
 type Params = { service: string };
 type Search = { start?: string; end?: string };
-
-export const metadata: Metadata = {
-  title: "Your Details",
-};
 
 export default async function YourDetailsPage({
   params,

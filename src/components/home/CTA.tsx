@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { contactConfig } from "@/lib/contact";
 
 export default function CTA() {
   return (
@@ -20,7 +21,7 @@ export default function CTA() {
               Request Staff
             </Link>
             <Link
-              href="tel:+10000000000"
+              href={contactConfig.phoneHref}
               className="rounded-full bg-white px-7 py-3 text-sm font-semibold text-brand-blue-dark transition-colors hover:bg-brand-blue-light"
             >
               Call Us Today

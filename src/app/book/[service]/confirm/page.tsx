@@ -1,14 +1,9 @@
-import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { services } from "@/data/services";
 import BookingStepper from "@/components/booking/BookingStepper";
 import ConfirmBooking from "@/components/booking/ConfirmBooking";
 
 type Params = { service: string };
-
-export const metadata: Metadata = {
-  title: "Confirm Booking",
-};
 
 export default async function ConfirmPage({
   params,

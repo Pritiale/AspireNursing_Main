@@ -1,13 +1,7 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import { services } from "@/data/services";
 import BookingStepper from "@/components/booking/BookingStepper";
-
-export const metadata: Metadata = {
-  title: "Book Staff",
-  description:
-    "Request aged care staff from Aspire Nursing Agency. Choose the role you need, set your shift dates and times, and we'll match the right professional.",
-};
+import { formatHourlyRateLabel, pricingConfig } from "@/lib/pricing";
 
 export default function BookPage() {
   return (
@@ -21,8 +15,9 @@ export default function BookPage() {
           </h1>
           <p className="mx-auto mt-3 max-w-2xl text-brand-muted">
             Select an aged care role to begin your booking. Every booking has a
-            minimum shift length of 4 hours.
+            minimum shift length of {pricingConfig.minimumShiftHours} hours.
           </p>
+          <p className="mx-auto mt-2 max-w-2xl text-xs text-brand-muted">{pricingConfig.note}</p>
         </div>
 
         <div className="mt-8 grid gap-3 sm:grid-cols-2 sm:gap-4 lg:grid-cols-3">
@@ -33,9 +28,16 @@ export default function BookPage() {
               className="group flex items-center justify-between gap-3 rounded-xl border border-brand-border bg-white p-4 transition-all hover:border-brand-blue hover:shadow-md sm:flex-col sm:items-start sm:gap-4 sm:p-5"
             >
               <div className="flex items-center gap-2.5">
-                <h2 className="text-base font-bold text-brand-blue-dark sm:text-lg">
-                  {service.title}
-                </h2>
+                <div>
+                  <h2 className="text-base font-bold text-brand-blue-dark sm:text-lg">
+                    {service.title}
+                  </h2>
+                  {formatHourlyRateLabel(service.id) && (
+                    <p className="mt-1 text-xs font-semibold text-brand-blue">
+                      {formatHourlyRateLabel(service.id)}
+                    </p>
+                  )}
+                </div>
                 {service.abbr && (
                   <span className="rounded-full bg-brand-blue-light px-2 py-0.5 text-[10px] font-bold text-brand-blue">
                     {service.abbr}

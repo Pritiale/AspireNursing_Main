@@ -2,17 +2,14 @@
 
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
+import { formatHourlyRateLabel, getMinimumShiftHours, getMinimumShiftMs } from "@/lib/pricing";
 
 type ServiceLite = {
   id: string;
   title: string;
   abbr?: string;
-  icon: string;
   short: string;
 };
-
-const MIN_HOURS = 4;
-const MIN_MS = MIN_HOURS * 60 * 60 * 1000;
 
 function pad(n: number) {
   return n.toString().padStart(2, "0");
@@ -51,6 +48,9 @@ function formatLength(ms: number) {
 }
 
 export default function ShiftDetailsForm({ service }: { service: ServiceLite }) {
+  const minHours = getMinimumShiftHours(service.id);
+  const minMs = getMinimumShiftMs(service.id);
+  const rateLabel = formatHourlyRateLabel(service.id);
   const [startDate, setStartDate] = useState("");
   const [startTime, setStartTime] = useState("");
   const [endDate, setEndDate] = useState("");
@@ -71,7 +71,7 @@ export default function ShiftDetailsForm({ service }: { service: ServiceLite }) 
   }, [start, end]);
 
   const isPositive = diffMs !== null && diffMs > 0;
-  const meetsMinimum = diffMs !== null && diffMs >= MIN_MS;
+  const meetsMinimum = diffMs !== null && diffMs >= minMs;
   const canContinue = Boolean(start && end && meetsMinimum);
 
   let lengthLabel = "Select start & end first";
@@ -90,9 +90,6 @@ export default function ShiftDetailsForm({ service }: { service: ServiceLite }) 
       {/* Form */}
       <div className="rounded-2xl border border-brand-border bg-white p-6 sm:p-8">
         <div className="flex items-center gap-4 border-b border-brand-border pb-6">
-          <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-brand-blue-light text-3xl">
-            {service.icon}
-          </div>
           <div>
             <div className="flex items-center gap-2">
               <h1 className="text-2xl font-bold tracking-tight text-brand-blue-dark">
@@ -105,12 +102,15 @@ export default function ShiftDetailsForm({ service }: { service: ServiceLite }) 
               )}
             </div>
             <p className="mt-1 text-sm text-brand-muted">{service.short}</p>
+            {rateLabel && (
+              <p className="mt-1 text-sm font-semibold text-brand-blue">{rateLabel}</p>
+            )}
           </div>
         </div>
 
         <p className="mt-6 text-xs text-brand-muted">
           Times use 15-minute steps (:00, :15, :30, :45). Minimum shift length is{" "}
-          {MIN_HOURS} hours.
+          {minHours} hours.
         </p>
 
         {/* Start */}
@@ -199,7 +199,7 @@ export default function ShiftDetailsForm({ service }: { service: ServiceLite }) 
           )}
           {isPositive && !meetsMinimum && (
             <p className="mt-2 text-xs font-medium text-brand-red">
-              Minimum shift length is {MIN_HOURS} hours.
+              Minimum shift length is {minHours} hours.
             </p>
           )}
         </div>
@@ -253,7 +253,7 @@ export default function ShiftDetailsForm({ service }: { service: ServiceLite }) 
           </Link>
           {!canContinue && (
             <p className="mt-2 text-center text-xs text-brand-muted">
-              Select start &amp; end (min {MIN_HOURS} hours) to continue.
+              Select start &amp; end (min {minHours} hours) to continue.
             </p>
           )}
         </div>

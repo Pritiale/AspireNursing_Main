@@ -1,0 +1,31 @@
+{
+  "name": "Aspire Nursing Agency",
+  "short_name": "Aspire Nursing",
+  "description": "Melbourne's aged care specialist nursing agency — RNs, ENs, PCAs available 24/7.",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "theme_color": "#28547e",
+  "background_color": "#ffffff",
+  "icons": [
+    {
+      "src": "/favicons/web-app-manifest-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/favicons/web-app-manifest-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/favicons/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ],
+  "categories": ["health", "medical", "business"]
+}

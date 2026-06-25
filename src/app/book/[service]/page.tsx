@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { services } from "@/data/services";
@@ -6,22 +5,6 @@ import BookingStepper from "@/components/booking/BookingStepper";
 import ShiftDetailsForm from "@/components/booking/ShiftDetailsForm";
 
 type Params = { service: string };
-
-export function generateStaticParams() {
-  return services.map((s) => ({ service: s.id }));
-}
-
-export async function generateMetadata({
-  params,
-}: {
-  params: Promise<Params>;
-}): Promise<Metadata> {
-  const { service } = await params;
-  const found = services.find((s) => s.id === service);
-  return {
-    title: found ? `Book ${found.title}` : "Book Staff",
-  };
-}
 
 export default async function ServiceBookingPage({
   params,
@@ -55,7 +38,6 @@ export default async function ServiceBookingPage({
             id: selected.id,
             title: selected.title,
             abbr: selected.abbr,
-            icon: selected.icon,
             short: selected.short,
           }}
         />

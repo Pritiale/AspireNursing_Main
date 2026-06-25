@@ -1,12 +1,6 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import { services } from "@/data/services";
-
-export const metadata: Metadata = {
-  title: "Our Care Team",
-  description:
-    "Aspire Nursing Agency is an aged care specialist staffing agency providing Registered Nurses, Enrolled Nurses, and Personal Care Assistants.",
-};
+import ServiceGrid from "@/components/ServiceGrid";
 
 export default function ServicesPage() {
   return (
@@ -30,23 +24,15 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      {/* Quick nav */}
-      <section className="border-b border-brand-border bg-white">
-        <div className="mx-auto flex max-w-7xl flex-wrap justify-center gap-2 px-4 py-4 sm:px-6 lg:px-8">
-          {services.map((service) => (
-            <a
-              key={service.id}
-              href={`#${service.id}`}
-              className="rounded-full border border-brand-border px-4 py-1.5 text-sm font-medium text-brand-muted transition-colors hover:border-brand-blue hover:bg-brand-blue-light hover:text-brand-blue"
-            >
-              {service.title}
-            </a>
-          ))}
+      {/* Service grid */}
+      <section className="bg-gray-50 py-16 sm:py-20">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <ServiceGrid services={services} />
         </div>
       </section>
 
-      {/* Service sections */}
-      <div className="bg-white">
+      {/* Detailed service sections */}
+      <div>
         {services.map((service, index) => (
           <section
             key={service.id}
@@ -56,11 +42,8 @@ export default function ServicesPage() {
             <div className="mx-auto grid max-w-7xl items-center gap-10 px-4 py-16 sm:px-6 lg:grid-cols-2 lg:px-8 lg:py-20">
               <div className={index % 2 === 1 ? "lg:order-2" : ""}>
                 <div className="flex items-center gap-3">
-                  <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-white text-3xl shadow-sm">
-                    {service.icon}
-                  </div>
                   {service.abbr && (
-                    <span className="rounded-full bg-brand-blue px-3 py-1 text-sm font-bold text-white">
+                    <span className="rounded-full bg-brand-blue px-4 py-1.5 text-sm font-bold text-white">
                       {service.abbr}
                     </span>
                   )}
@@ -71,12 +54,20 @@ export default function ServicesPage() {
                 <p className="mt-4 text-lg leading-relaxed text-brand-muted">
                   {service.description}
                 </p>
-                <Link
-                  href={`/book/${service.id}`}
-                  className="mt-7 inline-flex rounded-full bg-brand-red px-7 py-3 text-sm font-semibold text-white transition-colors hover:bg-brand-red-dark"
-                >
-                  Request {service.title}
-                </Link>
+                <div className="mt-6 flex flex-wrap gap-3">
+                  <Link
+                    href={`/services/${service.id}`}
+                    className="inline-flex rounded-full border border-brand-border bg-white px-7 py-3 text-sm font-semibold text-brand-blue-dark transition-colors hover:bg-brand-blue-light"
+                  >
+                    Learn more
+                  </Link>
+                  <Link
+                    href={`/book/${service.id}`}
+                    className="inline-flex rounded-full bg-brand-red px-7 py-3 text-sm font-semibold text-white transition-colors hover:bg-brand-red-dark"
+                  >
+                    Request {service.title}
+                  </Link>
+                </div>
               </div>
 
               <div className={index % 2 === 1 ? "lg:order-1" : ""}>
