@@ -96,6 +96,7 @@ export const services: Service[] = [
     id: "after-hours-supervisor",
     title: "After-Hours Supervisor",
     abbr: "AHS",
+    image: "/services/after-hours-supervisor.png",
     gradient: "from-indigo-800 to-indigo-600",
     short: "Senior nurses providing leadership and clinical support across evenings, nights, and weekends.",
     description:

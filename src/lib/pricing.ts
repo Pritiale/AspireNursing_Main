@@ -22,51 +22,68 @@ export const pricingConfig = {
   currencySymbol: "$",
   minimumShiftHours: 4,
   gstIncluded: true,
-  note: "Indicative rates only. Afternoon and night shift allowances apply. Final pricing may vary by shift type, location, urgency, and public holiday loadings.",
+  /**
+   * Shift loadings are derived from Fair Work Australia awards (effective 2026):
+   *   - Nurses Award 2020 [MA000034]: Afternoon +12.5%, Night +15%
+   *   - Aged Care Award 2010 [MA000018]: Afternoon +12.5%, Night +15%
+   * Rates are indicative; public holiday (2.5×), Saturday (1.5×) and Sunday (1.75×)
+   * loadings are quoted separately on request.
+   */
+  afternoonLoadingPct: 12.5,
+  nightLoadingPct: 15,
+  note: "Indicative rates only. Afternoon (+12.5%) and Night (+15%) shift allowances are applied to the standard rate per Fair Work Australia award requirements. Public holiday, Saturday and Sunday loadings are quoted separately. Final pricing may vary by shift type, location and urgency.",
 } as const;
 
-/** Authoritative hourly rates — update here as the single source of truth for all pages. */
+/**
+ * Hourly rates — single source of truth for all pages.
+ *
+ * Afternoon / night rates are calculated from the base rate using the
+ * Fair Work loadings above and rounded to the nearest dollar.
+ *
+ * RN / EN / RNIC / CCC / AHS → Nurses Award 2020 [MA000034]
+ * PCA                         → Aged Care Award 2010 [MA000018]
+ */
 export const servicePricing: ServicePricing[] = [
   {
     serviceId: "registered-nurses",
     hourlyRate: 105,
-    afternoonRate: undefined, // TBC
-    nightRate: undefined,     // TBC
+    afternoonRate: 118, // $105 × 1.125 = $118.13
+    nightRate: 121,     // $105 × 1.15  = $120.75
     minimumHours: 4,
   },
   {
     serviceId: "enrolled-nurses",
     hourlyRate: 85,
-    afternoonRate: undefined,
-    nightRate: undefined,
+    afternoonRate: 96,  // $85 × 1.125 = $95.63
+    nightRate: 98,      // $85 × 1.15  = $97.75
     minimumHours: 4,
   },
   {
     serviceId: "personal-care-assistants",
     hourlyRate: 65,
-    afternoonRate: undefined,
-    nightRate: undefined,
+    afternoonRate: 73,  // $65 × 1.125 = $73.13
+    nightRate: 75,      // $65 × 1.15  = $74.75
     minimumHours: 4,
   },
   {
     serviceId: "registered-nurse-in-charge",
     hourlyRate: 120,
-    afternoonRate: undefined,
-    nightRate: undefined,
+    afternoonRate: 135, // $120 × 1.125 = $135.00
+    nightRate: 138,     // $120 × 1.15  = $138.00
     minimumHours: 4,
   },
   {
     serviceId: "clinical-care-coordinator",
     hourlyRate: 140,
-    afternoonRate: undefined,
-    nightRate: undefined,
+    afternoonRate: 158, // $140 × 1.125 = $157.50
+    nightRate: 161,     // $140 × 1.15  = $161.00
     minimumHours: 4,
   },
   {
     serviceId: "after-hours-supervisor",
     hourlyRate: 140,
-    afternoonRate: undefined,
-    nightRate: undefined,
+    afternoonRate: 158, // $140 × 1.125 = $157.50
+    nightRate: 161,     // $140 × 1.15  = $161.00
     minimumHours: 4,
   },
 ];
